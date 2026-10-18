@@ -148,3 +148,108 @@ Mitu added serving notes to the recipe, committed the changes, and pushed them t
 and main ans is git fetch and git merge are two separate commands. git fetch origin downloads the latest commits from the remote repository without integrating them into the current local branch. Then, git merge origin/main integrates those changes into the local main branch.
 git pull normally performs both steps in one command: it fetches remote changes and then integrates them using merge or rebase, depending on the configuration.
 In short: fetch + merge gives you more control because you can inspect changes between the two steps, while pull is a convenient way to fetch and integrate changes in one command. Neither command automatically pushes your local changes to GitHub; use git push for that.
+
+
+
+## Chapter 5 — Half-Cooked Halua and Time Travel
+
+### Task A: Save Halua Work with Git Stash
+
+While I was preparing the halua recipe, Nanu reminded me that I had forgotten to add cardamom to the biryani. I used `git stash` to temporarily save my unfinished halua work so I could fix the biryani first.
+
+**Commands used:**
+
+```bash
+git status
+git stash push -m "WIP: half-cooked halua"
+git switch eid-special
+nano biryani.md
+git add biryani.md
+git commit -m "fix: add cardamom to biryani recipe"
+git switch chapter-5-stash
+git stash list
+git stash pop
+git status
+```
+
+**What I learned:**
+
+The `git stash` command temporarily saves unfinished changes so I can switch tasks without making an incomplete commit. After fixing and committing the biryani recipe, I used `git stash pop` to restore my halua work.
+
+### Task B: Organize Recipes and Delete an Old Recipe
+
+I organized the recipe files into a `recipes/` directory using `git mv`. I also removed an old recipe using `git rm` and inspected the commit history.
+
+**Commands used:**
+
+```bash
+mkdir -p recipes
+git mv bhapa-pitha.md recipes/bhapa-pitha.md
+git mv biryani.md recipes/biryani.md
+git mv shemai.md recipes/shemai.md
+git mv chittagong-mezban.md recipes/chittagong-mezban.md
+git mv halua.md recipes/halua.md
+git rm old-recipe.md
+git status
+git add -A
+git commit -m "refactor: organize recipes into folders"
+git log --stat -M
+```
+
+**What I learned:**
+
+- `git mv` moves or renames files and stages the changes.
+- `git rm` removes a tracked file and stages its deletion.
+- `git log --stat -M` displays commit history, file-change statistics, and helps Git detect renamed files.
+
+### Task C: Inspect a Commit with Git Show
+
+I used `git log --oneline` to find a commit SHA and then inspected that commit using `git show`.
+
+**Commands used:**
+
+```bash
+git log --oneline
+git show 4c41f75
+```
+
+**What I learned:**
+
+The `git show` command displays information about a specific commit, including its commit message and the changes introduced by it. This helps me understand how my recipe book changed over time.
+
+### Task D: Experiment with Git Reset Hard on a Test Branch
+
+I created a separate test branch named `reset-test` to experiment with `git reset --hard` without affecting `main`.
+
+**Commands used:**
+
+```bash
+git switch -c reset-test
+git log --oneline
+git status
+git reset --hard 4c41f75
+git reset --hard 3e647ef
+git log --oneline -5
+git status
+git reflog -5
+```
+
+First, I reset to `4c41f75`, which was already the current commit. This did not move the branch backward, but it discarded the staged changes I had made to `bazar-list.txt`.
+
+Then I reset to the older commit `3e647ef`. The `reset-test` branch moved back to that commit, and the working directory returned to the state recorded in that older commit. The later recipe-organization commit was no longer part of the current history of `reset-test`, although another branch could still reference it.
+
+**What I learned:**
+
+The `git reset --hard` command moves the current branch to a specified commit and resets both the staging area and working directory. It can discard staged and unstaged changes to tracked files. I performed this experiment on `reset-test`, not on `main`.
+
+### Question: Why Are Rebase and Reset Hard Dangerous on a Shared Branch?
+
+**Rebase:** Rebase rewrites commit history and can create new commit IDs. If other developers have already based their work on the original commits, this can cause confusing history and integration problems.
+
+**Reset hard:** `git reset --hard` moves the current branch to another commit and resets the staging area and working directory. It can discard uncommitted tracked-file changes and move later commits out of the branch's current history. On a shared branch, this can disrupt other developers who depend on those commits.
+
+**Safer approach:** Avoid rewriting shared history that other people depend on. When an existing shared commit needs to be undone, `git revert` is often safer because it creates a new commit that reverses the earlier change instead of rewriting history.
+
+### What I Learned in Chapter 5
+
+This chapter taught me how to pause unfinished work with `git stash`, organize and delete files with Git, inspect commits with `git show`, and move through commit history using `git reset --hard`. I also learned why destructive Git commands must be used carefully, especially on shared branches.
