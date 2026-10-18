@@ -5,7 +5,7 @@
 - Chicken
 - Onion
 - Yogurt
-- Ginger-garlic paste
+- Ginger-garlic past
 - Cardamom and saffron
 - Cinnamon
 - Salt
