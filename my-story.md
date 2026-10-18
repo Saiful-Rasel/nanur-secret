@@ -57,3 +57,55 @@ I accidentally staged `bazar-list.txt` using `git add bazar-list.txt`. I then us
 **What I learned:**
 
 I learned that `git restore --staged <filename>` unstages a file while preserving its contents. The command `git reset -- <filename>` can also be used for the same purpose. Neither command deletes the file from the working directory in this situation.
+
+
+## Chapter 3: The Eid Special
+
+### Task A: Create and Switch Branch
+
+**Commands used:**
+```bash
+git branch eid-special
+git checkout eid-special
+```
+
+**What I learned:** I created a separate branch named `eid-special` to work on Eid recipes without immediately changing the `main` branch.
+
+### Task B: Add Two Recipes in Separate Commits
+
+I created `biryani.md` and `shemai.md` on the `eid-special` branch and committed them separately.
+
+```bash
+git add biryani.md
+git commit -m "feat: add Eid biryani recipe"
+
+git add shemai.md
+git commit -m "feat: add shemai dessert recipe"
+```
+
+**What I learned:** Separate commits make it easier to track and review individual changes.
+
+### Task C: Merge into Main
+
+I switched back to `main` and checked the files before merging. The new recipes were available on `eid-special`, but were not initially present on `main`.
+
+```bash
+git checkout main
+git merge eid-special
+git log --oneline --graph --all
+```
+
+After merging, both recipes became available on `main`.
+
+### Challenge: Create and Resolve a Merge Conflict
+
+I created a `conflict-demo` branch and changed the same spice line in `biryani.md` differently on the two branches. When I merged `conflict-demo` into `main`, Git reported a merge conflict.
+
+I opened the file, reviewed both versions, removed the conflict markers, and kept the desired final content. Then I staged and committed the resolution.
+
+```bash
+git add biryani.md
+git commit -m "fix: resolve biryani spice merge conflict"
+```
+
+**What I learned:** A merge conflict occurs when Git cannot automatically combine conflicting changes. I must review the changes, choose or combine the correct content, remove conflict markers, and commit the resolution.
