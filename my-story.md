@@ -37,3 +37,23 @@ Nanu corrected the recipe and told me to use one and a half cups of gur instead 
 Next, I ran `git diff --staged` to check the changes in the staging area. Before running `git add`, the new correction did not appear in the staged diff. After running `git add bhapa-pitha.md`, the change appeared in `git diff --staged`.
 
 **Difference:** `git diff` shows unstaged changes, while `git diff --staged` shows staged changes that are ready to be committed.
+
+
+### Task E: Unstage an Accidentally Staged File
+
+**Command used:**
+
+```bash
+git add bazar-list.txt
+git status
+git restore --staged bazar-list.txt
+git status
+```
+
+**What happened:**
+
+I accidentally staged `bazar-list.txt` using `git add bazar-list.txt`. I then used `git restore --staged bazar-list.txt` to unstage the file without deleting it. After running `git status`, the file appeared under `Untracked files`, confirming that it was no longer staged and still existed in my working directory.
+
+**What I learned:**
+
+I learned that `git restore --staged <filename>` unstages a file while preserving its contents. The command `git reset -- <filename>` can also be used for the same purpose. Neither command deletes the file from the working directory in this situation.
