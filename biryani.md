@@ -6,7 +6,7 @@
 - Onion
 - Yogurt
 - Ginger-garlic past
-- Cardamom and saffron
+- Cardamom and saffron and something
 - Cinnamon
 - Salt
 - Cooking oil
