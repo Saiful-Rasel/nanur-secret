@@ -2,7 +2,7 @@
 ## Ingredients
 - Rice flour
 - Grated coconut
-- Date palm jaggery (gur)
+- 1.5 cup  palm jaggery (gur)
 - Salt
 - Water
 
