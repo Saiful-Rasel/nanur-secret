@@ -6,7 +6,7 @@
 - Onion
 - Yogurt
 - Ginger-garlic paste
-- Cardamom
+- Cardamom and cinnamon
 - Cinnamon
 - Salt
 - Cooking oil
