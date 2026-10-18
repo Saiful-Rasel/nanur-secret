@@ -14,3 +14,7 @@
 2. Cook the onion and spices.
 3. Add beef and cook until tender.
 4. Serve hot with rice.
+
+## Serving Notes
+- Serve hot with rice.
+- Prepare enough for family and guests.
