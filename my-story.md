@@ -109,3 +109,42 @@ git commit -m "fix: resolve biryani spice merge conflict"
 ```
 
 **What I learned:** A merge conflict occurs when Git cannot automatically combine conflicting changes. I must review the changes, choose or combine the correct content, remove conflict markers, and commit the resolution.
+
+
+
+
+## Chapter 4: Mitu Joins In
+
+### Task A: Create and Push GitHub Repository
+I created a GitHub repository, connected my local repository using `git remote add origin`, and pushed my commits using `git push`.
+
+### Task B: Mitu Clones and Adds a Recipe
+I cloned the repository into another folder to simulate Mitu working from Chattogram. I created `chittagong-mezban.md`, committed the file, and pushed it to GitHub.
+
+Commands used:
+- `git clone <repository-url>`
+- `git add chittagong-mezban.md`
+- `git commit -m "feat: add Chittagong mezban recipe"`
+- `git push`
+
+### Task C: Fetch and Merge
+Back in my original repository, I downloaded remote updates and merged them into my local main branch.
+
+Commands used:
+- `git fetch origin`
+- `git merge origin/main`
+
+### Task D: Pull New Changes
+Mitu added serving notes to the recipe, committed the changes, and pushed them to GitHub. I then used `git pull` in my original repository to bring those changes into my local branch.
+
+### What I Learned
+- `git clone` creates a local copy of a remote repository.
+- `git fetch origin` downloads remote updates without integrating them into the current local branch.
+- `git merge origin/main` integrates the fetched changes into my local branch.
+- `git pull` normally fetches remote updates and then integrates them using merge or rebase.
+- `git push` sends my local commits to the remote repository.
+- Fetch and merge give me separate steps to inspect and integrate changes, while pull combines fetching and integration into one command.
+
+and main ans is git fetch and git merge are two separate commands. git fetch origin downloads the latest commits from the remote repository without integrating them into the current local branch. Then, git merge origin/main integrates those changes into the local main branch.
+git pull normally performs both steps in one command: it fetches remote changes and then integrates them using merge or rebase, depending on the configuration.
+In short: fetch + merge gives you more control because you can inspect changes between the two steps, while pull is a convenient way to fetch and integrate changes in one command. Neither command automatically pushes your local changes to GitHub; use git push for that.
